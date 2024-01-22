@@ -1,4 +1,4 @@
-# Example Loan workflow using human task
+# Example workflow using human task
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
@@ -18,7 +18,7 @@ export SECRET=
 # replace CONDUCTOR_SERVER with the actual hostname, the URL must end with /api
 export SERVER_URL=http://CONDUCTOR_SERVER/api
 # Optional checkout workflow name defaults to MyCheckout2
-export WF_NAME=loan-origination-flow-test
+export WF_NAME=test-workflow-example
 ```
 
 ## Running the app

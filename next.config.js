@@ -11,7 +11,6 @@ module.exports = {
       serverUrl: process.env.SERVER_URL,
     },
     workflows: {
-      //requestForLoan: `${process.env.WF_NAME || "loan-origination-flow-test-jim-up"}`,
       requestForLoan: `${process.env.WF_NAME || "consent_test"}`,
       correlationId: "packet_workflow",
     },

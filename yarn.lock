@@ -259,10 +259,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@io-orkes/conductor-javascript@^2.0.0-rc3":
-  version "2.0.0-rc3"
-  resolved "https://registry.yarnpkg.com/@io-orkes/conductor-javascript/-/conductor-javascript-2.0.0-rc3.tgz#fc99a50bf9e406bba09ebd170d4c5954ad5c9b11"
-  integrity sha512-sBVHShpe6/cG2FYMtxaGoerHRGKHI209sPd+CfNKSoNwUbp5lk2yJGAmD1JGWRQFjVlA6sFW/1ZK0nLqxHsTzA==
+"@io-orkes/conductor-javascript@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@io-orkes/conductor-javascript/-/conductor-javascript-2.0.0.tgz#dfce174a04f582feb51af37b9697f759a11458ee"
+  integrity sha512-JUCA3yepoCxrcLMB69SICoYzBxufhFoxVkA/URH9Q8K5P56xGCbeTjv7huNaEbsfYgL0S5HpV0YPowWQ9WHNLA==
 
 "@jsonforms/core@^3.0.0":
   version "3.0.0"

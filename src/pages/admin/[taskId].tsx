@@ -122,9 +122,9 @@ export default function Test({
   }, [selectedTask]);
 
   return (
-    <MainLayout title="Loan App">
+    <MainLayout title="App">
       <Stack spacing={6} justifyContent={"center"} alignItems={"center"}>
-        <MainTitle>Loan App</MainTitle>
+        <MainTitle>App</MainTitle>
         
           <FormDisplay
             key={selectedTaskId}

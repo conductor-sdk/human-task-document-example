@@ -78,7 +78,7 @@ type Props = {
   };
 };
 
-export default function Loan(props: Props) {
+export default function Document(props: Props) {
   const [formState, setFormState] = useState(taskDefaultValues(props.task));
   const [showErrors, setShowErrors] = useState(false);
   const router = useRouter();

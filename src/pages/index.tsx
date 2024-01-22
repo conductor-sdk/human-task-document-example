@@ -19,7 +19,6 @@ export default function Home() {
           <SubText1>Select the option</SubText1>
           <Box>
             <SubText2 paragraph>The user will be asked to fill out a form.</SubText2>
-            <SubText2>Then the loan will be approved or denied</SubText2>
           </Box>
         </Stack>
         <Stack direction="row" spacing={2}>
