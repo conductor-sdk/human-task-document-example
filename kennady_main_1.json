@@ -1,0 +1,272 @@
+{
+  "createTime": 1704845066218,
+  "updateTime": 1705691538119,
+  "name": "kennady_main",
+  "description": "Main workflow",
+  "version": 1,
+  "tasks": [
+    {
+      "name": "inline",
+      "taskReferenceName": "inline_ref",
+      "inputParameters": {
+        "expression": "(function(){ return $.value1 + $.value2;})();",
+        "evaluatorType": "graaljs",
+        "value1": 1,
+        "value2": 2
+      },
+      "type": "INLINE",
+      "decisionCases": {},
+      "defaultCase": [],
+      "forkTasks": [],
+      "startDelay": 0,
+      "joinOn": [],
+      "optional": false,
+      "defaultExclusiveJoinTask": [],
+      "asyncComplete": false,
+      "loopOver": [],
+      "onStateChange": {}
+    },
+    {
+      "name": "switch",
+      "taskReferenceName": "switch_ref",
+      "inputParameters": {
+        "switchCaseValue": "usesBiometricClock"
+      },
+      "type": "SWITCH",
+      "decisionCases": {
+        "usesBiometricClock": [
+          {
+            "name": "human_message_consent",
+            "taskReferenceName": "human_message_biometric_consent_ref",
+            "inputParameters": {
+              "__humanTaskDefinition": {
+                "assignmentCompletionStrategy": "LEAVE_OPEN",
+                "userFormTemplate": {
+                  "name": "message_consent",
+                  "version": 0
+                },
+                "assignments": [
+                  {
+                    "assignee": {
+                      "user": "${workflow.input.userId}",
+                      "userType": "EXTERNAL_USER"
+                    },
+                    "slaMinutes": 120
+                  }
+                ]
+              },
+              "message_consent": "You will be asked to accept a consent. please click next",
+              "packet": "${workflow.input.packet}"
+            },
+            "type": "HUMAN",
+            "decisionCases": {},
+            "defaultCase": [],
+            "forkTasks": [],
+            "startDelay": 0,
+            "joinOn": [],
+            "optional": false,
+            "defaultExclusiveJoinTask": [],
+            "asyncComplete": false,
+            "loopOver": [],
+            "onStateChange": {}
+          },
+          {
+            "name": "human_consent",
+            "taskReferenceName": "human_consent_ref",
+            "inputParameters": {
+              "__humanTaskDefinition": {
+                "assignmentCompletionStrategy": "LEAVE_OPEN",
+                "userFormTemplate": {
+                  "name": "sign_biometric_document",
+                  "version": 0
+                },
+                "assignments": [
+                  {
+                    "assignee": {
+                      "user": "${workflow.input.userId}",
+                      "userType": "EXTERNAL_USER"
+                    },
+                    "slaMinutes": 60
+                  }
+                ],
+                "displayName": "Sign biometric consent"
+              },
+              "isConsent": "",
+              "packet": "${workflow.input.packet}"
+            },
+            "type": "HUMAN",
+            "decisionCases": {},
+            "defaultCase": [],
+            "forkTasks": [],
+            "startDelay": 0,
+            "joinOn": [],
+            "optional": false,
+            "defaultExclusiveJoinTask": [],
+            "asyncComplete": false,
+            "loopOver": [],
+            "onStateChange": {}
+          },
+          {
+            "name": "switch_des",
+            "taskReferenceName": "switch_des_ref",
+            "inputParameters": {
+              "userChoice": "${human_consent_ref.output.isConsent}"
+            },
+            "type": "SWITCH",
+            "decisionCases": {
+              "yes": [
+                {
+                  "name": "human_message_consent",
+                  "taskReferenceName": "human_ref",
+                  "inputParameters": {
+                    "__humanTaskDefinition": {
+                      "assignmentCompletionStrategy": "LEAVE_OPEN",
+                      "displayName": "Human Message",
+                      "userFormTemplate": {
+                        "name": "message_consent",
+                        "version": 0
+                      },
+                      "assignments": [
+                        {
+                          "assignee": {
+                            "user": "${workflow.input.userId}",
+                            "userType": "EXTERNAL_USER"
+                          },
+                          "slaMinutes": 160
+                        }
+                      ]
+                    },
+                    "message_consent": "Hi Boney",
+                    "packet": "${workflow.input.packet}"
+                  },
+                  "type": "HUMAN",
+                  "decisionCases": {},
+                  "defaultCase": [],
+                  "forkTasks": [],
+                  "startDelay": 0,
+                  "joinOn": [],
+                  "optional": false,
+                  "defaultExclusiveJoinTask": [],
+                  "asyncComplete": false,
+                  "loopOver": [],
+                  "onStateChange": {}
+                },
+                {
+                  "name": "TW",
+                  "taskReferenceName": "TW_ref",
+                  "inputParameters": {
+                    "workflowId": [
+                      "${workflow.input.packet}"
+                    ],
+                    "terminationReason": ""
+                  },
+                  "type": "TERMINATE_WORKFLOW",
+                  "decisionCases": {},
+                  "defaultCase": [],
+                  "forkTasks": [],
+                  "startDelay": 0,
+                  "joinOn": [],
+                  "optional": false,
+                  "defaultExclusiveJoinTask": [],
+                  "asyncComplete": false,
+                  "loopOver": [],
+                  "onStateChange": {}
+                }
+              ],
+              "no": []
+            },
+            "defaultCase": [],
+            "forkTasks": [],
+            "startDelay": 0,
+            "joinOn": [],
+            "optional": false,
+            "defaultExclusiveJoinTask": [],
+            "asyncComplete": false,
+            "loopOver": [],
+            "evaluatorType": "value-param",
+            "expression": "userChoice",
+            "onStateChange": {}
+          }
+        ]
+      },
+      "defaultCase": [
+        {
+          "name": "human_message_consent",
+          "taskReferenceName": "human_message_no_biometric_consent_ref",
+          "inputParameters": {
+            "__humanTaskDefinition": {
+              "assignmentCompletionStrategy": "LEAVE_OPEN",
+              "userFormTemplate": {
+                "name": "message_consent",
+                "version": 0
+              },
+              "assignments": [
+                {
+                  "assignee": {
+                    "user": "${workflow.input.userId}",
+                    "userType": "EXTERNAL_USER"
+                  },
+                  "slaMinutes": 160
+                }
+              ]
+            },
+            "message_consent": "It seems you dont need biometric consent"
+          },
+          "type": "HUMAN",
+          "decisionCases": {},
+          "defaultCase": [],
+          "forkTasks": [],
+          "startDelay": 0,
+          "joinOn": [],
+          "optional": false,
+          "defaultExclusiveJoinTask": [],
+          "asyncComplete": false,
+          "loopOver": [],
+          "onStateChange": {}
+        },
+        {
+          "name": "display_non_biometric_client",
+          "taskReferenceName": "terminate_ref",
+          "inputParameters": {
+            "terminationStatus": "COMPLETED",
+            "terminationReason": "No Biometric Consent"
+          },
+          "type": "TERMINATE",
+          "decisionCases": {},
+          "defaultCase": [],
+          "forkTasks": [],
+          "startDelay": 0,
+          "joinOn": [],
+          "optional": false,
+          "defaultExclusiveJoinTask": [],
+          "asyncComplete": false,
+          "loopOver": [],
+          "onStateChange": {}
+        }
+      ],
+      "forkTasks": [],
+      "startDelay": 0,
+      "joinOn": [],
+      "optional": false,
+      "defaultExclusiveJoinTask": [],
+      "asyncComplete": false,
+      "loopOver": [],
+      "evaluatorType": "value-param",
+      "expression": "switchCaseValue",
+      "onStateChange": {}
+    }
+  ],
+  "inputParameters": [
+    "userId",
+    "packet"
+  ],
+  "outputParameters": {},
+  "failureWorkflow": "",
+  "schemaVersion": 2,
+  "restartable": true,
+  "workflowStatusListenerEnabled": false,
+  "timeoutPolicy": "ALERT_ONLY",
+  "timeoutSeconds": 0,
+  "variables": {},
+  "inputTemplate": {}
+}
